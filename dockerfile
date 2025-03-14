@@ -1,0 +1,23 @@
+FROM node:20-alpine
+
+# Set environment to production
+ENV NODE_ENV=production
+
+# Create app directory
+WORKDIR /app
+
+# Install app dependencies
+# Copy package.json and package-lock.json first for better layer caching
+COPY package*.json ./
+
+# Install dependencies
+RUN npm install --production
+
+# Bundle app source
+COPY . .
+
+# Expose the port the app runs on
+EXPOSE 3000
+
+# Command to run the application
+CMD [ "node", "index.js" ]

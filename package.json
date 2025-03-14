@@ -1,0 +1,22 @@
+{
+  "name": "docker-swam",
+  "version": "1.0.0",
+  "description": "NodeJS server to show server IP address",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "build": "docker build -t nodejs-ip-server .",
+    "docker:build": "docker build -t nodejs-ip-server .",
+    "docker:run": "docker run -p 3000:3000 nodejs-ip-server",
+    "docker:compose": "docker-compose up -d",
+    "docker:down": "docker-compose down",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
