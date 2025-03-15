@@ -1,11 +1,8 @@
-version: '3'
-
+version: "3.8"
 services:
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: nodejs-ip-server
+    image: dtrinhit/docker-swarm-ip:latest  # ✅ Chỉ dùng image, không dùng build
+    container_name: docker-swarm-nodebe
     restart: always
     ports:
       - "3000:3000"
@@ -13,7 +10,18 @@ services:
       - PORT=3000
     networks:
       - app-network
+    deploy:
+      replicas: 3
+      restart_policy:
+        condition: any
+      update_config:
+        parallelism: 1
+        delay: 10s
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: "512M"
 
 networks:
   app-network:
-    driver: bridge
+    driver: overlay
